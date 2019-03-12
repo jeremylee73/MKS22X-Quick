@@ -18,35 +18,24 @@ public class Quick{
     }
     System.out.println();
     swap(data, start, pivotIndex);
-    if (data[start] > pivot) {
-      swap(data, start, end);
-      end -= 1;
-    } else {
-      if (start > pivotIndex){
-        swap(data, start, pivotIndex);
-        pivotIndex = start;
+    while (start != end){
+      if (data[start] > pivot) {
+        swap(data, start, end);
+        end -= 1;
       } else {
         start += 1;
       }
     }
 
-    // if (data[start] <= pivot) {
-    //   swap(data, start, pivotIndex);
-    //   pivotIndex = start;
-    //   pivot = data[pivotIndex];
-    // } else {
-    //   swap(data, start-1, pivotIndex);
-    //   pivotIndex = start-1;
-    //   pivot = data[pivotIndex];
-    // }
+    for (int i=0; i<data.length-1; i++){
+      if (data[i] <= pivot && data[i+1] >= pivot){
+        swap(data, 0, i);
+      }
+    }
     for (int i=0; i<data.length; i++){
       System.out.print(data[i] + " ");
     }
-    for (int i=0; i<data.length; i++){
-      if (data[i] == pivot){
-        return i;
-      }
-    }
+    System.out.println();
     return 0;
   }
 
@@ -58,6 +47,6 @@ public class Quick{
 
   public static void main(String[] args){
     int[] test = new int[] {17,61,67,47,93,12,20,4,44,68};
-    System.out.println(Partition.partition(test,0,test.length-1));
+    partition(test,0,test.length-1);
   }
 }
