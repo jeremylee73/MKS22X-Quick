@@ -27,16 +27,21 @@ public class Quick{
       }
     }
 
+    if (data[data.length-1] <= pivot){
+      swap(data, 0, data.length-1);
+    }
+
     for (int i=0; i<data.length-1; i++){
       if (data[i] <= pivot && data[i+1] >= pivot){
         swap(data, 0, i);
+        pivotIndex = i;
       }
     }
     for (int i=0; i<data.length; i++){
       System.out.print(data[i] + " ");
     }
     System.out.println();
-    return 0;
+    return pivotIndex;
   }
 
   private static void swap(int[] data, int a, int b){
@@ -47,6 +52,6 @@ public class Quick{
 
   public static void main(String[] args){
     int[] test = new int[] {17,61,67,47,93,12,20,4,44,68};
-    partition(test,0,test.length-1);
+    System.out.println(partition(test,0,test.length-1));
   }
 }
