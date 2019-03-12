@@ -1,6 +1,10 @@
 import java.util.*;
 
 public class Quick{
+  private static int pivot;
+  private static int pivotIndex;
+  private static int s;
+  private static int e;
     /*Modify the array such that:
    *1. Only the indices from start to end inclusive are considered in range
    *2. A random index from start to end inclusive is chosen, the corresponding
@@ -10,8 +14,10 @@ public class Quick{
    *@return the index of the final position of the pivot element.
    */
   public static int partition(int[] data, int start, int end){
-    int pivotIndex = (int)(Math.random() * data.length);
-    int pivot = data[pivotIndex];
+    s = start;
+    e = end;
+    pivotIndex = (int)(Math.random() * data.length);
+    pivot = data[pivotIndex];
     System.out.println(pivot);
     for (int i=0; i<data.length; i++){
       System.out.print(data[i] + " ");
@@ -41,13 +47,35 @@ public class Quick{
       System.out.print(data[i] + " ");
     }
     System.out.println();
-    return pivotIndex;
+    return pivot;
   }
 
   private static void swap(int[] data, int a, int b){
     int temp = data[a];
     data[a] = data[b];
     data[b] = temp;
+  }
+
+  /*return the value that is the kth smallest value of the array. k=0 is the smallest*/
+  public static int quickselect(int[] data, int k){
+    if (k == partition(data,0,data.length)){
+      return data[pivotIndex];
+    }
+    if (k > partition(data, 0, data.length)){
+      int[] newData = new int[e-pivotIndex];
+      for (int i=0; i<newData.length; i++){
+        newData[i] = data[i+pivotIndex];
+      }
+      return quickselect(newData, k);
+    }
+    if (k < partition(data, 0, data.length)){
+      int[] newData = new int[pivotIndex+1];
+      for (int i=0; i<newData.length; i++){
+        newData[i] = data[i];
+      }
+      return quickselect(newData, k);
+    }
+    return 0;
   }
 
   public static void main(String[] args){
