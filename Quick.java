@@ -18,11 +18,6 @@ public class Quick{
     e = end;
     pivotIndex = (int)(Math.random() * data.length);
     pivot = data[pivotIndex];
-    System.out.println(pivot);
-    for (int i=0; i<data.length; i++){
-      System.out.print(data[i] + " ");
-    }
-    System.out.println();
     swap(data, start, pivotIndex);
     while (start != end){
       if (data[start] > pivot) {
@@ -43,10 +38,6 @@ public class Quick{
         pivotIndex = i;
       }
     }
-    for (int i=0; i<data.length; i++){
-      System.out.print(data[i] + " ");
-    }
-    System.out.println();
     return pivot;
   }
 
@@ -58,17 +49,17 @@ public class Quick{
 
   /*return the value that is the kth smallest value of the array. k=0 is the smallest*/
   public static int quickselect(int[] data, int k){
-    if (k == partition(data,0,data.length)){
+    if (k == partition(data,0,data.length-1)){
       return data[pivotIndex];
     }
-    if (k > partition(data, 0, data.length)){
+    if (k > partition(data, 0, data.length-1)){
       int[] newData = new int[e-pivotIndex];
       for (int i=0; i<newData.length; i++){
         newData[i] = data[i+pivotIndex];
       }
       return quickselect(newData, k);
     }
-    if (k < partition(data, 0, data.length)){
+    if (k < partition(data, 0, data.length-1)){
       int[] newData = new int[pivotIndex+1];
       for (int i=0; i<newData.length; i++){
         newData[i] = data[i];
@@ -80,6 +71,19 @@ public class Quick{
 
   public static void main(String[] args){
     int[] test = new int[] {17,61,67,47,93,12,20,4,44,68};
+    for (int i=0; i<test.length; i++){
+      System.out.print(test[i] + " ");
+    }
+    System.out.println();
     System.out.println(partition(test,0,test.length-1));
+    for (int i=0; i<test.length; i++){
+      System.out.print(test[i] + " ");
+    }
+    System.out.println();
+    System.out.println(quickselect(test, 4));
+    for (int i=0; i<test.length; i++){
+      System.out.print(test[i] + " ");
+    }
+    System.out.println();
   }
 }
