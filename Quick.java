@@ -48,8 +48,6 @@ public class Quick{
      data[y] = temp;
    }
 
-
-
   /*return the value that is the kth smallest value of the array. k=0 is the smallest*/
   public static int quickselect(int[] data, int k){
     int start = 0;
