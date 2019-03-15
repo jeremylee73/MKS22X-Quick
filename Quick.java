@@ -64,23 +64,18 @@ public class Quick{
     return data[pivot];
   }
 
-  // public static void quicksort(int[] data, int lo, int hi){
-  //   if (lo >= hi){
-  //     return;
-  //   }
-  //   int pivot = partition(data, lo, hi);
-  //   System.out.println("Pivot #:  "+data[pivot]);
-  //   for (int i=0; i<data.length; i++){
-  //     System.out.print(data[i] + " ");
-  //   }
-  //   System.out.println();
-  //   // for (int i=lo; i<=hi; i++){
-  //   //   System.out.print(data[i] + " ");
-  //   // }
-  //   // System.out.println();
-  //   quicksort(data, lo, pivot-1);
-  //   quicksort(data, pivot+1, hi);
-  // }
+  public static void quicksort(int[] data) {
+    quickH(data, 0, data.length-1);
+  }
+
+  public static void quickH(int[] data, int lo, int hi) {
+    if (lo >= hi) {
+      return;
+    }
+    int[] p = partitionDutch(data, lo, hi);
+    quickH(data, lo, p[0]-1);
+    quickH(data, p[1]+1, hi);
+  }
 
   public static void main(String[] args){
     int[] test = {17,61,67,47,93,12,20,4,44,68};
