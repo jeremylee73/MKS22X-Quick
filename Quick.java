@@ -48,6 +48,8 @@ public class Quick{
      data[y] = temp;
    }
 
+
+
   /*return the value that is the kth smallest value of the array. k=0 is the smallest*/
   public static int quickselect(int[] data, int k){
     int start = 0;
@@ -64,17 +66,42 @@ public class Quick{
     return data[pivot];
   }
 
+  private static int[] partitionDutch(int[] data, int start, int end){
+    int lt = start;
+    int gt = end;
+    int i = lt + 1;
+    int pivot = start;
+    while (i <= gt) {
+      if (data[i] < data[pivot]) {
+        int t = data[lt];
+        data[lt] = data[i];
+        data[i] = t;
+        lt++;
+        i++;
+        pivot++;
+      } else if (data[i] == data[pivot]) {
+        i++;
+      } else {
+        int t = data[gt];
+        data[gt] = data[i];
+        data[i] = t;
+        gt--;
+      }
+    }
+    return new int[] { lt, gt };
+  }
+
   public static void quicksort(int[] data) {
     quickH(data, 0, data.length-1);
   }
 
-  public static void quickH(int[] data, int lo, int hi) {
-    if (lo >= hi) {
+  public static void quickH(int[] data, int start, int end) {
+    if (start >= end) {
       return;
     }
-    int[] p = partitionDutch(data, lo, hi);
-    quickH(data, lo, p[0]-1);
-    quickH(data, p[1]+1, hi);
+    int[] partD = partitionDutch(data, start, end);
+    quickH(data, start, partD[0]-1);
+    quickH(data, partD[1]+1, end);
   }
 
   public static void main(String[] args){
