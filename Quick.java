@@ -49,26 +49,20 @@ public class Quick{
    }
 
   /*return the value that is the kth smallest value of the array. k=0 is the smallest*/
-  // public static int quickselect(int[] data, int k){
-  //   if (k == partition(data,0,data.length-1)){
-  //     return data[pivotIndex];
-  //   }
-  //   if (k > partition(data, 0, data.length-1)){
-  //     int[] newData = new int[e-pivotIndex];
-  //     for (int i=0; i<newData.length; i++){
-  //       newData[i] = data[i+pivotIndex];
-  //     }
-  //     return quickselect(newData, k);
-  //   }
-  //   if (k < partition(data, 0, data.length-1)){
-  //     int[] newData = new int[pivotIndex+1];
-  //     for (int i=0; i<newData.length; i++){
-  //       newData[i] = data[i];
-  //     }
-  //     return quickselect(newData, k);
-  //   }
-  //   return 0;
-  // }
+  public static int quickselect(int[] data, int k){
+    int start = 0;
+    int end = data.length - 1;
+    int pivot = partition(data, start, end);
+    if (pivot != k) {
+      if (pivot > k) {
+        end = pivot - 1;
+      } else {
+        start = pivot + 1;
+      }
+      pivot = partition(data, start, end);
+    }
+    return data[pivot];
+  }
 
   // public static void quicksort(int[] data, int lo, int hi){
   //   if (lo >= hi){
@@ -95,7 +89,7 @@ public class Quick{
     }
     System.out.println();
 
-    System.out.println(test[partition(test,0,test.length-1)]);
+    System.out.println(quickselect(test,0));
     for (int i=0; i<test.length; i++){
       System.out.print(test[i] + " ");
     }
